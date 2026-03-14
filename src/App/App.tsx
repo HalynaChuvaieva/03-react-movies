@@ -50,13 +50,13 @@ export default function App() {
     }
 
     return (
-        <>
+        <div className={css.app}>
             <Toaster />
             <SearchBar onSubmit={handleSubmit} />
             {isLoading && <Loader />}
             {isError && <ErrorMessage/>}
             {movies.length !== 0 && <MovieGrid movies={movies} onSelect={openModal}/>}
             {selectedMovie && <MovieModal movie={selectedMovie} onClose={closeModal} />}
-        </>
+        </div>
     )
 }
