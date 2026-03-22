@@ -13,7 +13,6 @@ export default function App() {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
-
     const [selectedMovie, setSelectedMovie] = useState<Movie| null>(null);
 
     const openModal = (movie: Movie) => {
@@ -23,15 +22,10 @@ export default function App() {
         setSelectedMovie(null);
     };
 
-    const handleSubmit = async (formData: FormData) => {
+    const handleSubmit = async (query: string) => {
         setIsError(false);
 
-        const query = formData.get("query") as string;
-        
-        if (!query.trim()) {
-            toast.error("Please enter your search query.");
-            return;
-        }
+
 
         try {
             setIsLoading(true);
@@ -41,7 +35,7 @@ export default function App() {
             if (data.length === 0) {
                 toast.error("No movies found for your request.");
             }
-        } catch (error) {
+        } catch {
             setIsError(true);
         }
         finally {
